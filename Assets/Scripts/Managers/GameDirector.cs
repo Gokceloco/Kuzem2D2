@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class GameDirector : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public EnemyManager enemyManager;
+
     void Start()
     {
-        
+        StartGame();
     }
-
-    // Update is called once per frame
-    void Update()
+    void StartGame()
     {
-        
+        enemyManager.StartEnemyManager();
     }
 }

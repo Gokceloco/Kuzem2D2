@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -12,12 +13,44 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        MovePlayer();        
+        MovePlayer();
         ClampPlayerPosition();
-        if (Input.GetKeyDown(KeyCode.Space))
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
         {
-            Shoot();
+            gameObject.SetActive(false);
         }
+        if (collision.CompareTag("Collectable"))
+        {
+            collision.gameObject.SetActive(false);
+        }
+    }
+
+
+    //Methods
+    private void ClampPlayerPosition()
+    {
+        var pos = transform.position;
+        if (pos.x > playerXBorder)
+        {
+            pos.x = playerXBorder;
+        }
+        else if (pos.x < -playerXBorder)
+        {
+            pos.x = -playerXBorder;
+        }
+        if (pos.y > playerYBorder)
+        {
+            pos.y = playerYBorder;
+        }
+        else if (pos.y < -playerYBorder)
+        {
+            pos.y = -playerYBorder;
+        }
+        transform.position = pos;
     }
 
     void MovePlayer()
@@ -41,30 +74,5 @@ public class Player : MonoBehaviour
         }
 
         transform.position += direction.normalized * playerMoveSpeed * Time.deltaTime;
-    }
-    void ClampPlayerPosition()
-    {
-        var pos = transform.position;
-        if (transform.position.x < -playerXBorder)
-        {
-            pos.x = -playerXBorder;
-        }
-        if (transform.position.x > playerXBorder)
-        {
-            pos.x = playerXBorder;
-        }
-        if (transform.position.y < -playerYBorder)
-        {
-            pos.y = -playerYBorder;
-        }
-        if (transform.position.y > playerYBorder)
-        {
-            pos.y = playerYBorder;
-        }
-        transform.position = pos;
-    }
-    void Shoot()
-    {
-        print("Shoot");
     }
 }
