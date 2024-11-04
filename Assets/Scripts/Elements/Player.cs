@@ -8,13 +8,21 @@ public class Player : MonoBehaviour
 {
     public float playerMoveSpeed;
 
+    public float playerBulletSpeed;
+
     public float playerXBorder;
     public float playerYBorder;
+
+    public Bullet bulletPrefab;
 
     void Update()
     {
         MovePlayer();
         ClampPlayerPosition();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,7 +39,7 @@ public class Player : MonoBehaviour
 
 
     //Methods
-    private void ClampPlayerPosition()
+    void ClampPlayerPosition()
     {
         var pos = transform.position;
         if (pos.x > playerXBorder)
@@ -74,5 +82,12 @@ public class Player : MonoBehaviour
         }
 
         transform.position += direction.normalized * playerMoveSpeed * Time.deltaTime;
+    }
+
+    void Shoot()
+    {
+        var newBullet = Instantiate(bulletPrefab);
+        newBullet.transform.position = transform.position;
+        newBullet.StartBullet(playerBulletSpeed);
     }
 }

@@ -6,6 +6,10 @@ public class EnemyManager : MonoBehaviour
 {
     public Enemy enemyPrefab;
 
+    public float enemyYSpacing;
+
+    public int enemyCount;
+
     public void StartEnemyManager()
     {
         SpawnEnemies();
@@ -13,7 +17,12 @@ public class EnemyManager : MonoBehaviour
 
     void SpawnEnemies()
     {
-        var newEnemy = Instantiate(enemyPrefab);
-        newEnemy.transform.position = new Vector3(-1, 6, 0);       
+        for (int i = 0; i < enemyCount; i++) 
+        {
+            var newEnemy = Instantiate(enemyPrefab);
+            var enemyXPos = Random.Range(-2.2f, 2.2f);
+            var enemyYPos = 6 + i * enemyYSpacing;
+            newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
+        }              
     }
 }

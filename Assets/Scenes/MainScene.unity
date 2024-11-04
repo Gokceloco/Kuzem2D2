@@ -132,9 +132,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 64001206}
-  - component: {fileID: 64001207}
   - component: {fileID: 64001208}
   - component: {fileID: 64001209}
+  - component: {fileID: 64001207}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -171,8 +171,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMoveSpeed: 3
+  playerBulletSpeed: 10
   playerXBorder: 2.3
   playerYBorder: 4
+  bulletPrefab: {fileID: 4227754293765660790, guid: 209169cd77107f546b080cbb369204dd, type: 3}
 --- !u!50 &64001208
 Rigidbody2D:
   serializedVersion: 4
@@ -243,7 +245,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6, y: 0.75}
   m_EdgeRadius: 0
 --- !u!1 &218828244
 GameObject:
@@ -677,6 +679,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2977574993810898744, guid: 70e6479126890854a9cd7e83d9f2ba49, type: 3}
+  enemyYSpacing: 1.5
+  enemyCount: 200
 --- !u!1 &1905818086
 GameObject:
   m_ObjectHideFlags: 0
