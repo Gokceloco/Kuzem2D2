@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ public class Player : MonoBehaviour
 
     public Bullet bulletPrefab;
 
+    private void Start()
+    {
+
+    }
     void Update()
     {
         MovePlayer();

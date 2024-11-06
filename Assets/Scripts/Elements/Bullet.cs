@@ -21,7 +21,11 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             gameObject.SetActive(false);
-            collision.gameObject.SetActive(false);
+            collision.GetComponent<Enemy>().GetHit(1);
+        }
+        if (collision.CompareTag("Border"))
+        {
+            gameObject.SetActive(false);
         }
     }
 }
