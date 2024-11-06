@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,8 +14,11 @@ public class Enemy : MonoBehaviour
 
     public TextMeshPro healthTMP;
 
+    public SpriteRenderer spriteRenderer;
+
     private void Start()
     {
+        startHealth += Random.Range(0,10);
         _currentHealth = startHealth;
         healthTMP.text = _currentHealth.ToString();
     }
@@ -28,6 +32,15 @@ public class Enemy : MonoBehaviour
     {
         _currentHealth -= damage;
         healthTMP.text = _currentHealth.ToString();
+
+        transform.DOKill();
+        transform.localScale = Vector3.one;
+        transform.DOScale(1.2f, .1f).SetLoops(2, LoopType.Yoyo);
+
+        spriteRenderer.DOKill();
+        spriteRenderer.color = Color.red;
+        spriteRenderer.DOColor(Color.white, .1f).SetLoops(2, LoopType.Yoyo);
+
         if (_currentHealth <= 0)
         {
             gameObject.SetActive(false);

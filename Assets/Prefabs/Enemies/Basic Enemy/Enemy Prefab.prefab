@@ -147,6 +147,7 @@ MonoBehaviour:
   startHealth: 5
   speed: 1
   healthTMP: {fileID: 3244916589760308505}
+  spriteRenderer: {fileID: 7796850231810830444}
 --- !u!1 &8111910556257478399
 GameObject:
   m_ObjectHideFlags: 0
