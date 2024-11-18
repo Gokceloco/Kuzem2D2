@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b357ddf063765ab44bb428f86344b973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameDirector: {fileID: 2082146005}
   playerMoveSpeed: 3
   playerBulletSpeed: 10
   playerXBorder: 2.3
@@ -758,8 +759,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2977574993810898744, guid: 70e6479126890854a9cd7e83d9f2ba49, type: 3}
-  bossEnemyPrefab: {fileID: 2977574993810898744, guid: 38da71835fa8cb4439853231ea6d0971, type: 3}
+  bossEnemyPrefab: {fileID: 2977574993810898744, guid: 7a5aa6afc253fd54d8547402ea0966ac, type: 3}
   enemyYSpacing: 1.5
+--- !u!1 &1656695378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1656695379}
+  - component: {fileID: 1656695380}
+  m_Layer: 0
+  m_Name: CoinManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1656695379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656695378}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2082146006}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1656695380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656695378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4caaa60ec9da747ab8b992f74ab9bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectedCoinCount: 0
 --- !u!1 &1905818086
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,6 +966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 1268218837}
+  coinManager: {fileID: 1656695380}
 --- !u!4 &2082146006
 Transform:
   m_ObjectHideFlags: 0
@@ -934,6 +981,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1268218836}
+  - {fileID: 1656695379}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807

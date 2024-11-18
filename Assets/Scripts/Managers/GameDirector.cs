@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameDirector : MonoBehaviour
 {
     public EnemyManager enemyManager;
+    public CoinManager coinManager;
 
     void Start()
     {

@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameDirector gameDirector;
+
     public float playerMoveSpeed;
 
     public float playerBulletSpeed;
@@ -39,6 +41,8 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Coin"))
         {
+            print("in trigger enter");
+            gameDirector.coinManager.IncreaseCoinCount(1);
             collision.gameObject.SetActive(false);
         }
     }

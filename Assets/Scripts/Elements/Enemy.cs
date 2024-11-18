@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
 
     public GameObject coinPrefab;
 
+    private bool _didSpawnCoin;
+
     private void Start()
     {
         startHealth += Random.Range(0,10);
@@ -48,8 +50,12 @@ public class Enemy : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            var newCoin = Instantiate(coinPrefab);
-            newCoin.transform.position = transform.position + Vector3.forward;
+            if (!_didSpawnCoin)
+            {
+                var newCoin = Instantiate(coinPrefab);
+                newCoin.transform.position = transform.position + Vector3.forward;
+                _didSpawnCoin = true;
+            }            
             gameObject.SetActive(false);
         }
     }
