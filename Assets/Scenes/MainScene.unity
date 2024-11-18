@@ -758,8 +758,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2977574993810898744, guid: 70e6479126890854a9cd7e83d9f2ba49, type: 3}
+  bossEnemyPrefab: {fileID: 2977574993810898744, guid: 38da71835fa8cb4439853231ea6d0971, type: 3}
   enemyYSpacing: 1.5
-  enemyCount: 200
 --- !u!1 &1905818086
 GameObject:
   m_ObjectHideFlags: 0
