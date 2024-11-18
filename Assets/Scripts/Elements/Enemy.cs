@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -15,6 +16,10 @@ public class Enemy : MonoBehaviour
     public TextMeshPro healthTMP;
 
     public SpriteRenderer spriteRenderer;
+
+    public float flashDuration;
+
+    public GameObject coinPrefab;
 
     private void Start()
     {
@@ -39,10 +44,12 @@ public class Enemy : MonoBehaviour
 
         spriteRenderer.DOKill();
         spriteRenderer.color = Color.red;
-        spriteRenderer.DOColor(Color.white, .1f).SetLoops(2, LoopType.Yoyo);
+        spriteRenderer.DOColor(Color.white, flashDuration).SetLoops(2, LoopType.Yoyo);
 
         if (_currentHealth <= 0)
         {
+            var newCoin = Instantiate(coinPrefab);
+            newCoin.transform.position = transform.position + Vector3.forward;
             gameObject.SetActive(false);
         }
     }

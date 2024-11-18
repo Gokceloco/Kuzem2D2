@@ -5,15 +5,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float _speed;
+    private Vector3 _dir;
 
-    public void StartBullet(float bulletSpeed)
+    public void StartBullet(float bulletSpeed, Vector3 direction)
     {
         _speed = bulletSpeed;
+        _dir = direction;
     }
 
     void Update()
     {
-        transform.position += Vector3.up * Time.deltaTime * _speed;
+        transform.position += _dir * Time.deltaTime * _speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
