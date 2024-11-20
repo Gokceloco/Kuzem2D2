@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private GameDirector _gameDirector;
     private float _speed;
     private Vector3 _dir;
 
-    public void StartBullet(float bulletSpeed, Vector3 direction)
+    public void StartBullet(float bulletSpeed, Vector3 direction, GameDirector gameDirector)
     {
         _speed = bulletSpeed;
         _dir = direction;
+        _gameDirector = gameDirector;
     }
 
     void Update()
@@ -24,6 +26,7 @@ public class Bullet : MonoBehaviour
         {
             gameObject.SetActive(false);
             collision.GetComponent<Enemy>().GetHit(1);
+            _gameDirector.fxManager.PlayBulletHitFX(transform.position);
         }
         if (collision.CompareTag("Border"))
         {

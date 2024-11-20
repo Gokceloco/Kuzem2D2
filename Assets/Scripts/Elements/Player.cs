@@ -22,9 +22,12 @@ public class Player : MonoBehaviour
 
     public int extraShootCount;
 
+    public List<Vector3> shootDirections;
+
     private void Start()
     {
         StartCoroutine(ShootCoroutine());
+        shootDirections.Add(Vector3.up);
     }
 
     void Update()
@@ -41,8 +44,14 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Coin"))
         {
-            print("in trigger enter");
             gameDirector.coinManager.IncreaseCoinCount(1);
+            gameDirector.fxManager.PlayCoinCollectedFX(collision.transform.position);
+            collision.gameObject.SetActive(false);
+        }
+        if (collision.CompareTag("PowerUp"))
+        {
+            shootDirections.Add(new Vector3(UnityEngine.Random.Range(-1f,1f), UnityEngine.Random.Range(-1f, 1f), 0).normalized);
+            extraShootCount++;
             collision.gameObject.SetActive(false);
         }
     }
@@ -96,24 +105,14 @@ public class Player : MonoBehaviour
 
     IEnumerator ShootCoroutine()
     {
+
         while (true)
         {
             yield return new WaitForSeconds(attackRate);
 
             for (int i = 0; i < extraShootCount + 1; i++)
             {
-                if (i == 0)
-                {
-                    Shoot(Vector3.up);
-                }
-                else if (i == 1)
-                {
-                    Shoot(new Vector3(-.25f,1,0));
-                }
-                else if (i == 2)
-                {
-                    Shoot(new Vector3(.25f, 1, 0));
-                }
+                Shoot(shootDirections[i]);                
             }            
         }        
     }
@@ -122,6 +121,6 @@ public class Player : MonoBehaviour
     {
         var newBullet = Instantiate(bulletPrefab);
         newBullet.transform.position = transform.position;
-        newBullet.StartBullet(playerBulletSpeed, dir);
+        newBullet.StartBullet(playerBulletSpeed, dir, gameDirector);
     }
 }

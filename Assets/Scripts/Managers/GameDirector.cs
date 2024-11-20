@@ -6,6 +6,7 @@ public class GameDirector : MonoBehaviour
 {
     public EnemyManager enemyManager;
     public CoinManager coinManager;
+    public FxManager fxManager;
 
     void Start()
     {

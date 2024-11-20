@@ -177,7 +177,8 @@ MonoBehaviour:
   playerYBorder: 4
   bulletPrefab: {fileID: 4227754293765660790, guid: 209169cd77107f546b080cbb369204dd, type: 3}
   attackRate: 0.2
-  extraShootCount: 2
+  extraShootCount: 0
+  shootDirections: []
 --- !u!50 &64001208
 Rigidbody2D:
   serializedVersion: 4
@@ -806,6 +807,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectedCoinCount: 0
+--- !u!1 &1706916199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1706916200}
+  - component: {fileID: 1706916201}
+  m_Layer: 0
+  m_Name: FxManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1706916200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706916199}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2082146006}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1706916201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706916199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2245f7d52cf42344b75e602d3e5319e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinCollectesPS: {fileID: 8329209727781616627, guid: a93ba429c65af0442acf9cd461fab60b, type: 3}
+  bulletHitPS: {fileID: 8329209727781616627, guid: 99c469cb6a879aa4b8b19f43fa9f7a99, type: 3}
 --- !u!1 &1905818086
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,6 +1014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 1268218837}
   coinManager: {fileID: 1656695380}
+  fxManager: {fileID: 1706916201}
 --- !u!4 &2082146006
 Transform:
   m_ObjectHideFlags: 0
@@ -982,6 +1030,7 @@ Transform:
   m_Children:
   - {fileID: 1268218836}
   - {fileID: 1656695379}
+  - {fileID: 1706916200}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807

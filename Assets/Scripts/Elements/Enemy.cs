@@ -19,7 +19,8 @@ public class Enemy : MonoBehaviour
 
     public float flashDuration;
 
-    public GameObject coinPrefab;
+    public Coin coinPrefab;
+    public PowerUp powerUpPrefab;
 
     private bool _didSpawnCoin;
 
@@ -52,10 +53,21 @@ public class Enemy : MonoBehaviour
         {
             if (!_didSpawnCoin)
             {
-                var newCoin = Instantiate(coinPrefab);
-                newCoin.transform.position = transform.position + Vector3.forward;
+                if (Random.value < .5f)
+                {
+                    var newCoin = Instantiate(coinPrefab);
+                    newCoin.transform.position = transform.position + Vector3.forward * .8f;
+                    newCoin.StartCoin();
+                }
+                else
+                {
+                    var newPowerUp = Instantiate(powerUpPrefab);
+                    newPowerUp.transform.position = transform.position + Vector3.forward * .8f;
+                    newPowerUp.StartPowerUp();
+                }
+                
                 _didSpawnCoin = true;
-            }            
+            }                   
             gameObject.SetActive(false);
         }
     }
