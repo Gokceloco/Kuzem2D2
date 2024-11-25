@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 {
     public GameDirector gameDirector;
 
+    public Transform bulletsParent;
+
     public float playerMoveSpeed;
 
     public float playerBulletSpeed;
@@ -20,14 +22,17 @@ public class Player : MonoBehaviour
 
     public float attackRate;
 
-    public int extraShootCount;
-
     public List<Vector3> shootDirections;
 
-    private void Start()
+    public int startHealth;
+    private int _curHealth;
+
+    public Transform healthBarFill;
+
+    public void StartPlayer()
     {
+        _curHealth = startHealth;
         StartCoroutine(ShootCoroutine());
-        shootDirections.Add(Vector3.up);
     }
 
     void Update()
@@ -40,7 +45,12 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            gameObject.SetActive(false);
+            _curHealth -= 1;
+            UpdateHealthBar((float)_curHealth / startHealth);
+            if (_curHealth <= 0)
+            {
+                gameObject.SetActive(false);
+            }
         }
         if (collision.CompareTag("Coin"))
         {
@@ -51,9 +61,13 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("PowerUp"))
         {
             shootDirections.Add(new Vector3(UnityEngine.Random.Range(-1f,1f), UnityEngine.Random.Range(-1f, 1f), 0).normalized);
-            extraShootCount++;
             collision.gameObject.SetActive(false);
         }
+    }
+
+    void UpdateHealthBar(float ratio)
+    {
+        healthBarFill.transform.localScale = new Vector3(ratio, 1f, 1f);
     }
 
 
@@ -110,16 +124,16 @@ public class Player : MonoBehaviour
         {
             yield return new WaitForSeconds(attackRate);
 
-            for (int i = 0; i < extraShootCount + 1; i++)
+            for (int i = 0; i < shootDirections.Count; i++) 
             {
-                Shoot(shootDirections[i]);                
-            }            
+                Shoot(shootDirections[i]);
+            }
         }        
     }
 
     void Shoot(Vector3 dir)
     {
-        var newBullet = Instantiate(bulletPrefab);
+        var newBullet = Instantiate(bulletPrefab, bulletsParent);
         newBullet.transform.position = transform.position;
         newBullet.StartBullet(playerBulletSpeed, dir, gameDirector);
     }

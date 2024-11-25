@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private Player _player;
+
     public int startHealth;
 
     private int _currentHealth;
@@ -24,12 +26,14 @@ public class Enemy : MonoBehaviour
 
     private bool _didSpawnCoin;
 
-    private void Start()
+    public void StartEnemy(Player player)
     {
-        startHealth += Random.Range(0,10);
+        _player = player;
+        startHealth += Random.Range(0, 10);
+        startHealth += 10 * (player.shootDirections.Count - 1);
         _currentHealth = startHealth;
         healthTMP.text = _currentHealth.ToString();
-    }
+    } 
 
     void Update()
     {

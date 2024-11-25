@@ -8,12 +8,15 @@ public class GameDirector : MonoBehaviour
     public CoinManager coinManager;
     public FxManager fxManager;
 
+    public Player player;
+
     void Start()
     {
         StartGame();
     }
     void StartGame()
     {
+        player.StartPlayer();
         enemyManager.StartEnemyManager();
     }
 }

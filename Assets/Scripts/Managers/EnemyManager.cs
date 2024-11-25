@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public Player player;
+
     public Enemy enemyPrefab;
     public Enemy bossEnemyPrefab;
 
@@ -48,6 +50,7 @@ public class EnemyManager : MonoBehaviour
         var enemyYPos = 5 * enemyYSpacing;
         newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
         _spawnedEnemyCount++;
+        newEnemy.StartEnemy(player);
     }
 
     void SpawnTwoEnemies()
@@ -57,12 +60,14 @@ public class EnemyManager : MonoBehaviour
         var enemyYPos = 5 * enemyYSpacing;
         newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
         _spawnedEnemyCount++;
+        newEnemy.StartEnemy(player);
 
         var newEnemy2 = Instantiate(enemyPrefab);
         var enemyXPos2 = Random.Range(-1f, -2.2f);
         var enemyYPos2 = 5 * enemyYSpacing;
         newEnemy2.transform.position = new Vector3(enemyXPos2, enemyYPos2, 0);
         _spawnedEnemyCount++;
+        newEnemy2.StartEnemy(player);
     }
 
     void SpawnBoss()
@@ -72,5 +77,6 @@ public class EnemyManager : MonoBehaviour
         var enemyYPos = 5 * enemyYSpacing;
         newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
         _spawnedEnemyCount++;
+        newEnemy.StartEnemy(player);
     }
 }

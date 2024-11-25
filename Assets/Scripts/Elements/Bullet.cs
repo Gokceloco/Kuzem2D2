@@ -24,13 +24,13 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            gameObject.SetActive(false);
             collision.GetComponent<Enemy>().GetHit(1);
             _gameDirector.fxManager.PlayBulletHitFX(transform.position);
+            Destroy(gameObject);
         }
         if (collision.CompareTag("Border"))
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }
