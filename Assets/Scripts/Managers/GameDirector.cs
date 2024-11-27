@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +13,23 @@ public class GameDirector : MonoBehaviour
 
     void Start()
     {
-        StartGame();
+        RestartLevel();
     }
-    void StartGame()
+    private void Update()
     {
-        player.StartPlayer();
-        enemyManager.StartEnemyManager();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartLevel();
+        }
+    }
+    public void RestartLevel()
+    {
+        player.RestartPlayer();
+        enemyManager.RestartEnemyManager();
+    }
+
+    public void LevelFailed()
+    {
+        print("in level failed");
     }
 }

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: Bungee-Regular SDF
+  m_Name: Bungee-Outline
   m_EditorClassIdentifier: 
-  hashCode: -1033442216
+  hashCode: 1913285683
   material: {fileID: 2263688953870255042}
-  materialHashCode: 246761848
+  materialHashCode: -367160781
   m_Version: 1.1.0
   m_SourceFontFileGUID: f7a52485e476d86499e1beb93255a643
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: f7a52485e476d86499e1beb93255a643, type: 3}
@@ -2601,8 +2601,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - UNDERLAY_ON
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -2627,7 +2626,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 1555744874185006357}
+        m_Texture: {fileID: 1555744874185006357, guid: 3841fa2973475b644ac2a0edd7205e27, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:

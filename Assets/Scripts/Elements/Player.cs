@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -27,12 +28,25 @@ public class Player : MonoBehaviour
     public int startHealth;
     private int _curHealth;
 
-    public Transform healthBarFill;
+    public Transform healthBarFillParent;
+    public SpriteRenderer healthBarFill;
 
-    public void StartPlayer()
+    private Vector3 _mousePivotPos;
+    private Coroutine _shootCoroutine;
+
+    public void RestartPlayer()
     {
+        gameObject.SetActive(true);
         _curHealth = startHealth;
-        StartCoroutine(ShootCoroutine());
+        UpdateHealthBar(1);
+        transform.position = new Vector3(0,-2.8f,0);
+        if (_shootCoroutine != null)
+        {
+            StopCoroutine(_shootCoroutine);
+        }
+        _shootCoroutine = StartCoroutine(ShootCoroutine());
+        shootDirections.Clear();
+        shootDirections.Add(Vector3.up);
     }
 
     void Update()
@@ -50,6 +64,7 @@ public class Player : MonoBehaviour
             if (_curHealth <= 0)
             {
                 gameObject.SetActive(false);
+                gameDirector.LevelFailed();
             }
         }
         if (collision.CompareTag("Coin"))
@@ -67,7 +82,17 @@ public class Player : MonoBehaviour
 
     void UpdateHealthBar(float ratio)
     {
-        healthBarFill.transform.localScale = new Vector3(ratio, 1f, 1f);
+        //healthBarFillParent.transform.localScale = new Vector3(ratio, 1f, 1f);
+        healthBarFillParent.DOScaleX(ratio, .5f);
+        healthBarFill.DOColor(Color.red, .15f).SetLoops(2, LoopType.Yoyo);
+        if (ratio < .5f)
+        {
+            healthBarFill.color = Color.red;
+        }
+        else
+        {
+            healthBarFill.color = Color.white;
+        }
     }
 
 
@@ -97,24 +122,15 @@ public class Player : MonoBehaviour
     void MovePlayer()
     {
         Vector3 direction = Vector3.zero;
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetMouseButtonDown(0))
         {
-            direction += Vector3.up;
+            _mousePivotPos = Input.mousePosition;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetMouseButton(0))
         {
-            direction += Vector3.down;
+            direction = Input.mousePosition - _mousePivotPos;
         }
-        if (Input.GetKey(KeyCode.A))
-        {
-            direction += Vector3.left;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            direction += Vector3.right;
-        }
-
-        transform.position += direction.normalized * playerMoveSpeed * Time.deltaTime;
+        transform.position += direction * playerMoveSpeed * Time.deltaTime;
     }
 
     IEnumerator ShootCoroutine()
