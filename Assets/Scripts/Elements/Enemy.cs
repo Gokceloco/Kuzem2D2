@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
 
     private bool _didSpawnCoin;
 
+    public bool isBoss;
+
     public void StartEnemy(Player player)
     {
         _player = player;
@@ -71,7 +73,12 @@ public class Enemy : MonoBehaviour
                 }
                 
                 _didSpawnCoin = true;
-            }                   
+                if (isBoss)
+                {
+                    _player.gameDirector.LevelCompleted();
+                }
+            }
+            
             gameObject.SetActive(false);
         }
     }

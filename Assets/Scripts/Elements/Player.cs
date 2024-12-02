@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     public Transform healthBarFillParent;
     public SpriteRenderer healthBarFill;
 
-    private Vector3 _mousePivotPos;
+    public Vector3 _mousePivotPos;
     private Coroutine _shootCoroutine;
 
     public void RestartPlayer()
@@ -39,14 +39,19 @@ public class Player : MonoBehaviour
         gameObject.SetActive(true);
         _curHealth = startHealth;
         UpdateHealthBar(1);
-        transform.position = new Vector3(0,-2.8f,0);
+        transform.position = new Vector3(0, -2.8f, 0);
+        StopShooting();
+        _shootCoroutine = StartCoroutine(ShootCoroutine());
+        shootDirections.Clear();
+        shootDirections.Add(Vector3.up);
+    }
+
+    public void StopShooting()
+    {
         if (_shootCoroutine != null)
         {
             StopCoroutine(_shootCoroutine);
         }
-        _shootCoroutine = StartCoroutine(ShootCoroutine());
-        shootDirections.Clear();
-        shootDirections.Add(Vector3.up);
     }
 
     void Update()
@@ -66,6 +71,7 @@ public class Player : MonoBehaviour
                 gameObject.SetActive(false);
                 gameDirector.LevelFailed();
             }
+            gameDirector.fxManager.PlayPlayerHitFX(transform.position);
         }
         if (collision.CompareTag("Coin"))
         {
@@ -128,7 +134,8 @@ public class Player : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-            direction = Input.mousePosition - _mousePivotPos;
+            var currentMousePos = Input.mousePosition;
+            direction = currentMousePos - _mousePivotPos;
         }
         transform.position += direction * playerMoveSpeed * Time.deltaTime;
     }

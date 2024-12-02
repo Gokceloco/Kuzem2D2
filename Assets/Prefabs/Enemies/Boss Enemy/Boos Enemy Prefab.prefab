@@ -138,6 +138,7 @@ MonoBehaviour:
   flashDuration: 0.1
   coinPrefab: {fileID: 7719559512524978271, guid: a26e6883fcb666d459a1d4c21afd34f7, type: 3}
   powerUpPrefab: {fileID: 7651878305364043031, guid: 2389d86cfbfa00b40bb957142d56d296, type: 3}
+  isBoss: 1
 --- !u!58 &8382221276547231522
 CircleCollider2D:
   m_ObjectHideFlags: 0

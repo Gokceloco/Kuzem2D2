@@ -42,7 +42,7 @@ public class EnemyManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1.5f + Random.Range(0,2f));
-            if (_spawnedEnemyCount < 20)
+            if (_spawnedEnemyCount < 5)
             {
                 if (Random.value < .75f)
                 {
