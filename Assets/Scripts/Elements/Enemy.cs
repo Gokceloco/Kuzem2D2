@@ -2,7 +2,6 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -26,7 +25,13 @@ public class Enemy : MonoBehaviour
 
     private bool _isEnemyDestroyed;
 
-    public bool isBoss;
+    public EnemyType enemyType;
+
+    private Coroutine _shootCoroutine;
+
+    public Bullet bulletPrefab;
+    public float attackRate;
+    public float bulletSpeed;
 
     public void StartEnemy(Player player)
     {
@@ -39,7 +44,38 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        transform.position += Vector3.down * Time.deltaTime * speed;
+        if (enemyType == EnemyType.Shooting)
+        {
+            if (transform.position.y > 3)
+            {
+                transform.position += Vector3.down * Time.deltaTime * speed;
+            }
+            else if (_shootCoroutine == null)
+            {
+                _shootCoroutine = StartCoroutine(ShootCoroutine());
+            }
+        }
+        else
+        {
+            transform.position += Vector3.down * Time.deltaTime * speed;
+        }
+    }
+
+    IEnumerator ShootCoroutine()
+    {
+
+        while (true)
+        {
+            yield return new WaitForSeconds(attackRate);
+            var dir = (_player.transform.position - transform.position).normalized;
+            Shoot(dir);
+        }
+    }
+    void Shoot(Vector3 dir)
+    {
+        var newBullet = Instantiate(bulletPrefab);
+        newBullet.transform.position = transform.position;
+        newBullet.StartBullet(bulletSpeed, dir, _player.gameDirector);
     }
 
     public void GetHit(int damage)
@@ -65,7 +101,7 @@ public class Enemy : MonoBehaviour
     {
         if (!_isEnemyDestroyed)
         {
-            if (!isBoss)
+            if (enemyType != EnemyType.Boss)
             {
                 if (Random.value < .5f)
                 {
@@ -92,4 +128,12 @@ public class Enemy : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+}
+
+public enum EnemyType
+{
+    Basic,
+    Fast,
+    Shooting,
+    Boss,
 }

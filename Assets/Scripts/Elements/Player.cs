@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -76,14 +75,7 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            _curHealth -= 1;
-            UpdateHealthBar((float)_curHealth / startHealth);
-            if (_curHealth <= 0)
-            {
-                gameObject.SetActive(false);
-                gameDirector.LevelFailed();
-            }
-            gameDirector.fxManager.PlayPlayerHitFX(transform.position);
+            GetHit();
         }
         if (collision.CompareTag("Coin"))
         {
@@ -96,6 +88,18 @@ public class Player : MonoBehaviour
             shootDirections.Add(new Vector3(UnityEngine.Random.Range(-1f,1f), UnityEngine.Random.Range(-1f, 1f), 0).normalized);
             collision.gameObject.SetActive(false);
         }
+    }
+
+    public void GetHit()
+    {
+        _curHealth -= 1;
+        UpdateHealthBar((float)_curHealth / startHealth);
+        if (_curHealth <= 0)
+        {
+            gameObject.SetActive(false);
+            gameDirector.LevelFailed();
+        }
+        gameDirector.fxManager.PlayPlayerHitFX(transform.position);
     }
 
     void UpdateHealthBar(float ratio)

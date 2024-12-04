@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.0713986, y: 0.0713986, z: 0.0713986}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2670440457232782887}
@@ -93,10 +93,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2670440457232782887}
+  - component: {fileID: 3290448533028449853}
   - component: {fileID: 2977574993810898744}
-  - component: {fileID: 8382221276547231522}
   m_Layer: 0
-  m_Name: Boos Enemy Prefab
+  m_Name: Fast Enemy Prefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,29 +119,8 @@ Transform:
   - {fileID: 1823853973954003681}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2977574993810898744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5357939169113874539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2c0bda8f0a833a4cbecfe0ac8c33a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startHealth: 40
-  speed: 1
-  healthTMP: {fileID: 3244916589760308505}
-  spriteRenderer: {fileID: 4381886960883680241}
-  flashDuration: 0.1
-  coinPrefab: {fileID: 7719559512524978271, guid: a26e6883fcb666d459a1d4c21afd34f7, type: 3}
-  powerUpPrefab: {fileID: 7651878305364043031, guid: 2389d86cfbfa00b40bb957142d56d296, type: 3}
-  isBoss: 1
-  enemyType: 3
---- !u!58 &8382221276547231522
-CircleCollider2D:
+--- !u!61 &3290448533028449853
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -173,8 +152,39 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 10.24, y: 10.24}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.98
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &2977574993810898744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357939169113874539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c0bda8f0a833a4cbecfe0ac8c33a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 5
+  speed: 1.8
+  healthTMP: {fileID: 3244916589760308505}
+  spriteRenderer: {fileID: 4381886960883680241}
+  flashDuration: 0.1
+  coinPrefab: {fileID: 7719559512524978271, guid: a26e6883fcb666d459a1d4c21afd34f7, type: 3}
+  powerUpPrefab: {fileID: 7651878305364043031, guid: 2389d86cfbfa00b40bb957142d56d296, type: 3}
+  isBoss: 0
+  enemyType: 1
 --- !u!1 &8111910556257478399
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,15 +212,15 @@ RectTransform:
   m_GameObject: {fileID: 8111910556257478399}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.01}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.54922, y: 0.54922, z: 0.54922}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2670440457232782887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2.3, y: 1.12}
+  m_AnchoredPosition: {x: 0, y: 0.014}
+  m_SizeDelta: {x: 1.56, y: 1.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1407427807203851442
 MeshRenderer:
@@ -301,8 +311,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 6.95
+  m_fontSizeBase: 6.95
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

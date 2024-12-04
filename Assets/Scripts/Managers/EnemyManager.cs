@@ -9,6 +9,8 @@ public class EnemyManager : MonoBehaviour
     public CoinManager coinManager;
 
     public Enemy enemyPrefab;
+    public Enemy fastEnemyPrefab;
+    public Enemy shootingEnemyPrefab;
     public Enemy bossEnemyPrefab;
 
     public float enemyYSpacing;
@@ -67,7 +69,17 @@ public class EnemyManager : MonoBehaviour
     }
     void SpawnEnemy()
     {
-        var newEnemy = Instantiate(enemyPrefab);
+        var selectedEnemyPrefab = enemyPrefab;
+        var randomizer = Random.value;
+        if (gameDirector.levelNo > 2 && randomizer < .33f)
+        {
+            selectedEnemyPrefab = fastEnemyPrefab;
+        }
+        else if (gameDirector.levelNo > 3 && randomizer < .66f)
+        {
+            selectedEnemyPrefab = shootingEnemyPrefab;
+        }
+        var newEnemy = Instantiate(selectedEnemyPrefab);
         var enemyXPos = Random.Range(-2.2f, 2.2f);
         var enemyYPos = 5 * enemyYSpacing;
         newEnemy.transform.position = new Vector3(enemyXPos, enemyYPos, 0);
