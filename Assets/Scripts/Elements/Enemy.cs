@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     public Coin coinPrefab;
     public PowerUp powerUpPrefab;
 
-    private bool _didSpawnCoin;
+    private bool _isEnemyDestroyed;
 
     public bool isBoss;
 
@@ -57,7 +57,15 @@ public class Enemy : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            if (!_didSpawnCoin)
+            KillEnemy();
+        }
+    }
+
+    private void KillEnemy()
+    {
+        if (!_isEnemyDestroyed)
+        {
+            if (!isBoss)
             {
                 if (Random.value < .5f)
                 {
@@ -71,15 +79,17 @@ public class Enemy : MonoBehaviour
                     newPowerUp.transform.position = transform.position + Vector3.forward * .8f;
                     newPowerUp.StartPowerUp();
                 }
-                
-                _didSpawnCoin = true;
-                if (isBoss)
-                {
-                    _player.gameDirector.LevelCompleted();
-                }
             }
+            else
+            {
+                _player.gameDirector.LevelCompleted();
+            }
+
+            _isEnemyDestroyed = true;
             
-            gameObject.SetActive(false);
+            _player.gameDirector.audioManager.PlayEnemyDestroyAS();
         }
+
+        gameObject.SetActive(false);
     }
 }

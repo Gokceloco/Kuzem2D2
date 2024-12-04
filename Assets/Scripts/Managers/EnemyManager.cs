@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public Player player;
+    public GameDirector gameDirector;
+    public CoinManager coinManager;
 
     public Enemy enemyPrefab;
     public Enemy bossEnemyPrefab;
@@ -42,7 +44,9 @@ public class EnemyManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1.5f + Random.Range(0,2f));
-            if (_spawnedEnemyCount < 5)
+            var enemyCountBonus = (gameDirector.levelNo - 1) * 5;
+            enemyCountBonus = Mathf.Min(enemyCountBonus, 95);
+            if (_spawnedEnemyCount < 5 + enemyCountBonus)
             {
                 if (Random.value < .75f)
                 {

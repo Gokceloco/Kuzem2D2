@@ -8,10 +8,13 @@ public class GameDirector : MonoBehaviour
     public EnemyManager enemyManager;
     public CoinManager coinManager;
     public FxManager fxManager;
+    public AudioManager audioManager;
 
     public Player player;
 
     public MainUI mainUI;
+
+    public int levelNo;
 
     void Start()
     {
@@ -27,10 +30,11 @@ public class GameDirector : MonoBehaviour
     }
     public void RestartLevel()
     {
+        levelNo = PlayerPrefs.GetInt("HighestLevelReached");
         player.RestartPlayer();
         enemyManager.RestartEnemyManager();
         mainUI.RestartMainUI();
-        mainUI.SetLevelText(PlayerPrefs.GetInt("HighestLevelReached"));
+        mainUI.SetLevelText(levelNo);
     }
 
     public void LevelFailed()

@@ -41,9 +41,13 @@ public class Player : MonoBehaviour
         UpdateHealthBar(1);
         transform.position = new Vector3(0, -2.8f, 0);
         StopShooting();
-        _shootCoroutine = StartCoroutine(ShootCoroutine());
         shootDirections.Clear();
         shootDirections.Add(Vector3.up);
+    }
+
+    private void StartShooting()
+    {
+        _shootCoroutine = StartCoroutine(ShootCoroutine());
     }
 
     public void StopShooting()
@@ -58,6 +62,14 @@ public class Player : MonoBehaviour
     {
         MovePlayer();
         ClampPlayerPosition();
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartShooting();
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            StopShooting();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -159,5 +171,6 @@ public class Player : MonoBehaviour
         var newBullet = Instantiate(bulletPrefab, bulletsParent);
         newBullet.transform.position = transform.position;
         newBullet.StartBullet(playerBulletSpeed, dir, gameDirector);
+        gameDirector.audioManager.PlayBulletAS();
     }
 }
